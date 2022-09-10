@@ -1,4 +1,4 @@
-package com.myccb;
+package myccb;
 
 import java.io.IOException;
 

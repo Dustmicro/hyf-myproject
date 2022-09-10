@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="supperPj-service" />
+        <module name="supperPj-bean" />
+        <module name="supperPj-db" />
+        <module name="supperPj-comm" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hyf-myproject" target="8" />
+      <module name="supperPj-bean" target="8" />
+      <module name="supperPj-comm" target="8" />
+      <module name="supperPj-db" target="8" />
+      <module name="supperPj-service" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
