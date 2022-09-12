@@ -13,6 +13,7 @@
         <module>supperPj-db</module>
         <module>supperPj-comm</module>
         <module>supperPj-service</module>
+        <module>supper-genertor</module>
     </modules>
 
     <properties>
