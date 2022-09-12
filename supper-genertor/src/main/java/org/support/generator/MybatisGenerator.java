@@ -21,7 +21,7 @@ public class MybatisGenerator {
 
     private static File configFile;
     static {
-        String path = System.getProperty("user.dir").concat("\\src\\main\\resources\\generator\\generatorConfiguration.xml");
+        String path = System.getProperty("user.dir").concat("src\\main\\resources\\generator\\generatorConfiguration.xml");
         System.out.println(path);
         configFile = new File(path);
     }
