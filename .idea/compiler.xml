@@ -13,13 +13,5 @@
         <module name="supper-genertor" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="hyf-myproject" target="8" />
-      <module name="supper-genertor" target="8" />
-      <module name="supperPj-bean" target="8" />
-      <module name="supperPj-comm" target="8" />
-      <module name="supperPj-db" target="8" />
-      <module name="supperPj-service" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

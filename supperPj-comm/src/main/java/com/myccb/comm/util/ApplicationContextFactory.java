@@ -16,7 +16,7 @@ public class ApplicationContextFactory {
 
     private static ApplicationContext applicationContext;
 
-    private static void setApplicationContext(final ApplicationContext applicationContext){
+    public static void setApplicationContext(final ApplicationContext applicationContext){
         ApplicationContextFactory.applicationContext = applicationContext;
     }
 
