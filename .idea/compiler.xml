@@ -9,6 +9,7 @@
         <module name="supperPj-service" />
         <module name="supperPj-bean" />
         <module name="supperPj-db" />
+        <module name="framework-common-gateway" />
         <module name="supperPj-comm" />
         <module name="supper-genertor" />
       </profile>
