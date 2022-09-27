@@ -10,14 +10,14 @@ public class CommConstant {
     }
 
     /**错误码**/
-    private static final String ERROR_CODE = "FFFFFF";
+    public static final String ERROR_CODE = "FFFFFF";
 
     /**错误信息**/
-    private static final String ERROR_MSG = "系统错误";
+    public static final String ERROR_MSG = "系统错误";
 
     /**成功**/
-    private static final String SUCCESS = "成功";
+    public static final String SUCCESS = "成功";
 
     /**成功返回码**/
-    private static final String SUCCESS_CODE = "0000";
+    public static final String SUCCESS_CODE = "0000";
 }
