@@ -1,9 +1,15 @@
 package com.myccb.bean.db;
 
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class UserDb {
-    private String userName;
-    private String age;
-    private String userId;
+    public String userName;
+    public String age;
+    public String userId;
 
     public String getUserId() {
         return userId;
