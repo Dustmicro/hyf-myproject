@@ -79,6 +79,9 @@ public class UserActiveService {
             if (StringUtilsMycc.isNull(user)){
                 throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "该用户不存在");
             }
+            if (user.getStatus() == null){
+                throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该用户不存在");
+            }
             sqlSession.getMapper(UserMapper.class).updateByPrimaryKeySelective(user.getUserId());
 
         }catch (Exception e){

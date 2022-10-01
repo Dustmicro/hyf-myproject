@@ -10,8 +10,48 @@ public class UserDb {
     public String userName;
     public String age;
     public String userId;
+    /**账户名**/
     public String name;
+    /**密码**/
     public String password;
+    private Integer tel;
+    private String address;
+    /**用户权限**/
+    private Integer role;
+    /**数据状态**/
+    private String status;
+
+    public Integer getTel() {
+        return tel;
+    }
+
+    public void setTel(Integer tel) {
+        this.tel = tel;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getName() {
         return name;
