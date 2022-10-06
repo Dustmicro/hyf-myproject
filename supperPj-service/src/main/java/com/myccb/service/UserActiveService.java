@@ -120,18 +120,38 @@ public class UserActiveService {
         return map;
     }
 
+    /**
+     * 删除服务类
+     * @param userReq
+     * @param sqlSession
+     * @param header
+     * @return
+     * @throws ServiceExceptionMycc
+     */
+    @Service("deleteUser")
+    public String deleteUser(UserReq userReq, SqlSession sqlSession, AppMidRequestHeader header) throws ServiceExceptionMycc{
+        logger.info("人员删除服务，请求参数，{}", userReq);
+        CommService.CheckEmpty(userReq.getUserId(),"用户id");
+        try {
+            UserDb db = SetReqToDb(userReq);
+            //查询用户权限
+            UserDb role = sqlSession.getMapper(UserMapper.class).selectByPrimaryKey(Long.valueOf(db.getUserId()));
+            if ("1".equals(role.getRole())){
+                logger.info("该用户拥有权限，允许操作！");
+                sqlSession.getMapper(UserMapper.class).deleteByPrimaryKey(db.userId);
+            } else {
+                throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该用户没有权限，禁止该操作！");
+            }
+        } catch (ServiceExceptionMycc e){
+            logger.info("该用户没有权限，禁止该操作！", e.getDesc());
+            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该用户没有权限，禁止该操作！");
+        } catch (Exception e){
+            logger.info("删除异常");
+            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"删除异常");
+        }
+        return CommConstant.SUCCESS;
+    }
 
-//    public String DeleteUser(UserReq userReq, SqlSession sqlSession) throws ServiceExceptionMycc{
-//        logger.info("人员删除服务开始，请求参数，{}",userReq);
-//        CommService.CheckEmpty(userReq.getUserId(), "用户id");
-//        try {
-//            UserDb db = SetReqToDb(userReq);
-//            UserDb result = sqlSession.getMapper(UserMapper.class).selectByPrimaryKey()
-//            sqlSession.getMapper(UserMapper.class).deleteByPrimaryKey(db.getUserId());
-//        } catch (Exception e){
-//
-//        }
-//    }
     /**
      * 将请求报文字段设置到数据库
      * @param userReq
