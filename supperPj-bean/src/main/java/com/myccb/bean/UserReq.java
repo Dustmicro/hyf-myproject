@@ -4,6 +4,15 @@ public class UserReq {
     private String userName;
     private String age;
     private String userId;
+    private Integer departmentId;
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public String getUserId() {
         return userId;

@@ -20,6 +20,16 @@ public class UserDb {
     private Integer role;
     /**数据状态**/
     private String status;
+    /**部门id**/
+    private Integer departmentId;
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public Integer getTel() {
         return tel;

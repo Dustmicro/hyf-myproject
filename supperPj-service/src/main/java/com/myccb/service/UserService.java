@@ -1,8 +1,10 @@
 package com.myccb.service;
 
+
 import com.myccb.bean.db.UserDb;
 import com.myccb.comm.StringUtilsMycc;
 import com.myccb.mapper.UserMapper;
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,22 @@ public class UserService {
         List<UserDb> list = userMapper.selectUserRole(map);
         if (StringUtilsMycc.isNotEmpty(list)){
             flag = true;
+        }
+        return flag;
+    }
+
+    /**
+     * 是否本部门校验
+     * @param userId
+     * @param departmentId
+     * @return
+     */
+    public static boolean CheckDepartment(Long userId, Integer departmentId, SqlSession sqlSession){
+        boolean flag = false;
+        UserDb department = sqlSession.getMapper(UserMapper.class).selectByPrimaryKey(userId);
+        if (departmentId.equals(department.getDepartmentId())){
+            flag = true;
+            logger.info("是该部门人员，可以操作！");
         }
         return flag;
     }

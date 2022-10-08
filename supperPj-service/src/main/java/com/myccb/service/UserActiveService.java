@@ -142,6 +142,7 @@ public class UserActiveService {
             } else {
                 throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该用户没有权限，禁止该操作！");
             }
+            UserService.CheckDepartment(Long.valueOf(userReq.getUserId()),userReq.getDepartmentId(),sqlSession);
         } catch (ServiceExceptionMycc e){
             logger.info("该用户没有权限，禁止该操作！", e.getDesc());
             throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该用户没有权限，禁止该操作！");
