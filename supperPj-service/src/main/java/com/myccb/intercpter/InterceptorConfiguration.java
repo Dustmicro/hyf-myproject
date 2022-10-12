@@ -1,5 +1,6 @@
 package com.myccb.intercpter;
 
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -7,5 +8,5 @@ import org.springframework.context.annotation.Configuration;
  * @author 黄弋峰
  */
 @Configuration
-public class InterceptorConfiguration implements WebMvcConfiguration {
+public class InterceptorConfiguration extends WebMvcAutoConfiguration {
 }

@@ -1,7 +1,7 @@
-D:\MyProject\dev\hyf-myproject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\rewrite\AppMidRequestHeader.java
-D:\MyProject\dev\hyf-myproject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\util\ServiceExceptionMycc.java
-D:\MyProject\dev\hyf-myproject\framework-common-gateway\src\main\java\com\myccb\appmid\common\StartMain.java
-D:\MyProject\dev\hyf-myproject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\config\RouteConfig.java
-D:\MyProject\dev\hyf-myproject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\rewrite\AppMidResponseHeader.java
-D:\MyProject\dev\hyf-myproject\framework-common-gateway\src\main\java\com\myccb\appmid\service\process\Service.java
-D:\MyProject\dev\hyf-myproject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\filter\CacheBodyGlobalFilter.java
+D:\MyProject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\config\RouteConfig.java
+D:\MyProject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\rewrite\AppMidRequestHeader.java
+D:\MyProject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\filter\CacheBodyGlobalFilter.java
+D:\MyProject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\util\ServiceExceptionMycc.java
+D:\MyProject\framework-common-gateway\src\main\java\com\myccb\appmid\service\process\Service.java
+D:\MyProject\framework-common-gateway\src\main\java\com\myccb\appmid\common\gateway\rewrite\AppMidResponseHeader.java
+D:\MyProject\framework-common-gateway\src\main\java\com\myccb\appmid\common\StartMain.java
