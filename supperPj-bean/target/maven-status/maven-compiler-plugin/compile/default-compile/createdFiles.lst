@@ -1,0 +1,4 @@
+com\myccb\bean\UserReq.class
+com\myccb\bean\db\UserDb$UserDbBuilder.class
+com\myccb\bean\db\UserDb.class
+com\myccb\bean\TbRunLog.class
