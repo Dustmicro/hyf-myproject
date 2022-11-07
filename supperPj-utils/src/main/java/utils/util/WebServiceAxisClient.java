@@ -1,8 +1,8 @@
-package com.myccb.utils.util;
+package utils.util;
 
-import com.myccb.utils.Exception.BusinessException;
-import com.myccb.utils.constant.ResponseConstant;
-import com.myccb.utils.log.LoggerEngine;
+import utils.Exception.BusinessException;
+import utils.constant.ResponseConstant;
+import utils.log.LoggerEngine;
 
 /**
  * 前端客户端服务

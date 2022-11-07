@@ -1,4 +1,4 @@
-package com.myccb.utils.constant;
+package utils.constant;
 
 /**
  * @author 黄弋峰

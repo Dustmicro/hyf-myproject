@@ -1,4 +1,4 @@
-package com.myccb.utils.util;
+package utils.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

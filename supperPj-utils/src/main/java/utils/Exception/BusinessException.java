@@ -1,4 +1,4 @@
-package com.myccb.utils.Exception;
+package utils.Exception;
 
 import com.alibaba.fastjson.JSONObject;
 

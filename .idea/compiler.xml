@@ -7,10 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="supperPj-service" />
-        <module name="supperPj-bean" />
         <module name="supperPj-db" />
         <module name="framework-common-gateway" />
+        <module name="supperPj-service" />
+        <module name="supperPj-bean" />
+        <module name="supperPj-utils" />
         <module name="supperPj-comm" />
         <module name="supper-genertor" />
       </profile>

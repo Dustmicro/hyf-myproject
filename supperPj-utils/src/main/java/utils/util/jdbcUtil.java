@@ -1,4 +1,4 @@
-package com.myccb.utils.util;
+package utils.util;
 
 import java.io.IOException;
 import java.io.InputStream;
