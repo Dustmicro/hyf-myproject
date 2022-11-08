@@ -20,6 +20,7 @@ public class StringUtilsMycc extends Assert {
     private static final String NULLSTR = " ";
     /**下划线**/
     private static final char SEPARATOR = '_';
+    private static Object BeanConvertUtil;
 
     public static void hasValue(Object value,String msg){
         Assert.notNull(value, msg);
@@ -44,7 +45,8 @@ public class StringUtilsMycc extends Assert {
      * @return true为空：false为非空
      */
     public static boolean isEmpty(Collection<?> coll){
-        return isNull(coll) || coll.isEmpty();
+        Assert.isNull(coll);
+        return coll.isEmpty();
     }
 
     /**
@@ -56,15 +58,16 @@ public class StringUtilsMycc extends Assert {
         return ! isEmpty(coll);
     }
 
-    /**
-     * 判断一个对象是否为空
-     *
-     * @param object
-     * @return
-     */
-    public static boolean isNull(Object object){
-        return object == null;
-    }
+//    /**
+//     * 判断一个对象是否为空
+//     *
+//     * @param object
+//     * @return
+//     */
+//    public static boolean isNull(Object object){
+//
+//        return false;
+//    }
 
     /**
      * 判断一个对象数组是否为空
@@ -72,7 +75,8 @@ public class StringUtilsMycc extends Assert {
      * @return
      */
     public static boolean isEmpty(Object[] object){
-        return isNull(object) || (object.length == 0);
+        Assert.isNull(object);
+        return (object.length == 0);
     }
 
     /**
@@ -90,7 +94,8 @@ public class StringUtilsMycc extends Assert {
      * @return
      */
     public static boolean isEmpty(Map<?, ?> map){
-        return isNull(map) || map.isEmpty();
+        Assert.isNull(map);
+        return map.isEmpty();
     }
 
     public static boolean isNotEmpty(Map<?, ?> map){
@@ -152,16 +157,16 @@ public class StringUtilsMycc extends Assert {
         hasLength(info.get(key) == null ? "" : info.get(key).toString(), message);
     }
 
-    /**
-     * 判断 jsonObject 是否为空
-     *
-     * @param info
-     * @param key
-     * @param message
-     */
-    public static void hasKeyAndValue(Object info, String key, String message) {
-        hasKeyAndValue(BeanConvertUtil.beanCovertMap(info), key, message);
-    }
+//    /**
+//     * 判断 jsonObject 是否为空
+//     *
+//     * @param info
+//     * @param key
+//     * @param message
+//     */
+//    public static void hasKeyAndValue(Object info, String key, String message) {
+//        hasKeyAndValue(BeanConvertUtil.beanCovertMap(info), key, message);
+//    }
 
 
     /**
@@ -189,6 +194,20 @@ public class StringUtilsMycc extends Assert {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Description:判断字段空null <br>
+     *
+     * @param s
+     * @return boolean
+     */
+    public static boolean isNullOrNone(String s) {
+        if (s == null || "".equals(s.trim())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -252,18 +271,18 @@ public class StringUtilsMycc extends Assert {
     }
 
 
-    /**
-     * 检验是否在 infos 中存在 flowComponent 对应组件的key
-     *
-     * @param key
-     * @param message
-     */
-    public static void isEmail(JSONObject info, String key, String message) {
-        hasKeyAndValue(info, key, message);
-        if (!ValidatorUtil.isEmail(info.getString(key))) {
-            throw new IllegalArgumentException(message);
-        }
-    }
+//    /**
+//     * 检验是否在 infos 中存在 flowComponent 对应组件的key
+//     *
+//     * @param key
+//     * @param message
+//     */
+//    public static void isEmail(JSONObject info, String key, String message) {
+//        hasKeyAndValue(info, key, message);
+//        if (!ValidatorUtil.isEmail(info.getString(key))) {
+//            throw new IllegalArgumentException(message);
+//        }
+//    }
 
     public static void judgeAttrValue(JSONObject paramObj){
         if (!paramObj.containsKey("attrs")) {

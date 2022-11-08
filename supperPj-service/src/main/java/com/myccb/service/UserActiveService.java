@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.myccb.appmid.common.gateway.util.ServiceExceptionMycc;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +77,10 @@ public class UserActiveService {
 //            db.setUserName(userReq.getUserName());
             UserDb db = SetReqToDb(userReq);
             UserDb user = sqlSession.getMapper(UserMapper.class).find(db);
-            if (StringUtilsMycc.isNull(user)){
-                throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "该用户不存在");
-            }
+            Assert.isNull(user,"该用户不存在");
+//            if (){
+//                throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "该用户不存在");
+//            }
             if (user.getStatus() == null){
                 throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该用户不存在");
             }
