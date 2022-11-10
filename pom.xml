@@ -16,6 +16,7 @@
         <module>supper-genertor</module>
         <module>framework-common-gateway</module>
         <module>supperPj-utils</module>
+        <module>supperPj-boot</module>
     </modules>
 
     <properties>

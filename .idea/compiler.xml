@@ -10,6 +10,7 @@
         <module name="supperPj-db" />
         <module name="framework-common-gateway" />
         <module name="supperPj-service" />
+        <module name="supperPj-boot" />
         <module name="supperPj-bean" />
         <module name="supperPj-utils" />
         <module name="supperPj-comm" />

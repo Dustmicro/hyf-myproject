@@ -1,7 +1,9 @@
 package com.myccb.comm.redis;
 
 import com.myccb.comm.StringUtilsMycc;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+
+import redis.clients.jedis.Jedis;
+
 
 import java.util.Set;
 
@@ -13,10 +15,11 @@ public class BaseCache {
     public BaseCache() {
     }
 
-    protected static RedisProperties.Jedis getJedis(){
+    protected static Jedis getJedis(){
+        return null;
     }
     public static void removeData(String partten){
-        RedisProperties.Jedis redis = null;
+        Jedis redis = null;
         try {
             redis = getJedis();
             Set<String> keys = redis.keys("*" + partten);//redis的方法需要重写

@@ -1,6 +1,7 @@
 package com.myccb.comm.redis;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Jedis;
 
 public class JWTCache extends BaseCache{
 //    public static final String SESSION_PREFIX = "session_";
@@ -15,7 +16,7 @@ public class JWTCache extends BaseCache{
      * @returne
      */
     public static String getValue(String jdi){
-        RedisProperties.Jedis redis = null;
+        Jedis redis = null;
         try {
             redis = getJedis();
             return redis.get(jdi);
