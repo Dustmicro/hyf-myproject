@@ -7,13 +7,13 @@ import lombok.Data;
 @Data
 @Builder
 public class UserDb {
-    public String userName;
-    public String age;
-    public String userId;
+    private String userName;
+    private String age;
+    private String userId;
     /**账户名**/
-    public String name;
+    private String name;
     /**密码**/
-    public String password;
+    private String password;
     private Integer tel;
     private String address;
     /**用户权限**/

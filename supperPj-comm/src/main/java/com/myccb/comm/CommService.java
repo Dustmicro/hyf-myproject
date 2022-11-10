@@ -3,8 +3,7 @@ import com.myccb.appmid.common.gateway.util.ServiceExceptionMycc;
 import com.myccb.comm.constant.CommConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
+import org.springframework.util.Assert;
 
 
 /**
@@ -21,7 +20,7 @@ public class CommService {
      * @throws ServiceExceptionMycc
      */
     public static void CheckEmpty(String cloumn, String columnName) throws ServiceExceptionMycc{
-        if (StringUtilsMycc.isNull(cloumn)){
+        if (cloumn == null){
             throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "请求字段" + columnName + "必输项为空!!");
         }
     }

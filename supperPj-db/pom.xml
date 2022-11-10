@@ -14,7 +14,7 @@
         <dependency>
             <groupId>com.myccb</groupId>
             <artifactId>supperPj-bean</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>

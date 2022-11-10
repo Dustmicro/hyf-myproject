@@ -5,14 +5,12 @@ import com.myccb.appmid.service.process.Service;
 import com.myccb.bean.UserReq;
 import com.myccb.bean.db.UserDb;
 import com.myccb.comm.CommService;
-import com.myccb.comm.StringUtilsMycc;
 import com.myccb.comm.constant.CommConstant;
 import com.myccb.mapper.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.myccb.appmid.common.gateway.util.ServiceExceptionMycc;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -140,7 +138,7 @@ public class UserActiveService {
             UserDb role = sqlSession.getMapper(UserMapper.class).selectByPrimaryKey(Long.valueOf(db.getUserId()));
             if ("1".equals(role.getRole())){
                 logger.info("该用户拥有权限，允许操作！");
-                sqlSession.getMapper(UserMapper.class).deleteByPrimaryKey(db.userId);
+                sqlSession.getMapper(UserMapper.class).deleteByPrimaryKey(db.getUserId());
             } else {
                 throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该用户没有权限，禁止该操作！");
             }
