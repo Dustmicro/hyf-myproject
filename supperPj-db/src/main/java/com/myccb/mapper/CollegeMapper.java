@@ -10,9 +10,11 @@ import java.util.Map;
 public interface CollegeMapper {
     int deleteByPrimaryKey(String num);
 
-    CollegeDb selectByPrimaryKey(CollegeDb param);
+    CollegeDb selectByPrimaryKey(String num);
 
     CollegeDb find(CollegeDb param);
+
+    CollegeDb findForMember(String userId);
 
     int insert(CollegeDb param);
 

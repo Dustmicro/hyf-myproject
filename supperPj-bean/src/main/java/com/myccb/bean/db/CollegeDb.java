@@ -19,6 +19,25 @@ public class CollegeDb {
     private String MembeNum;
     private String address;
     private String status;
+    private String tel;
+    /**用户id**/
+    private String userId;
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getCollegeName() {
         return CollegeName;

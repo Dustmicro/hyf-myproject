@@ -25,7 +25,10 @@ public final class ApacheBeanConvertUtil {
     }
 
     static {
-        ConvertUtils.register(new Converter() { //注册一个日期转换器
+        ConvertUtils.register(new Converter() {
+            public static Object convert(Class aClass, Object o) {
+                return null;
+            } //注册一个日期转换器
 
             public <T> T convert(Class type, Object value) {
                 Date date1 = null;

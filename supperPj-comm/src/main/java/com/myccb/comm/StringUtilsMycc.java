@@ -2,6 +2,7 @@ package com.myccb.comm;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.Collection;
@@ -9,12 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static java.util.Objects.isNull;
+
 
 /**
  * 字符串工具类
  * @author 黄弋峰
  */
-public class StringUtilsMycc extends Assert {
+public class StringUtilsMycc extends StringUtils {
 
     /**空字符串**/
     private static final String NULLSTR = " ";
@@ -45,8 +48,7 @@ public class StringUtilsMycc extends Assert {
      * @return true为空：false为非空
      */
     public static boolean isEmpty(Collection<?> coll){
-        Assert.isNull(coll);
-        return coll.isEmpty();
+        return isNull(coll) || coll.isEmpty();
     }
 
     /**
@@ -67,39 +69,18 @@ public class StringUtilsMycc extends Assert {
 //    public static boolean isNull(Object object){
 //
 //        return false;
-//    }
-
-    /**
-     * 判断一个对象数组是否为空
-     * @param object
-     * @return
-     */
-    public static boolean isEmpty(Object[] object){
-        Assert.isNull(object);
-        return (object.length == 0);
-    }
-
-    /**
-     * 判断一个对象数组是否为非空
-     * @param object
-     * @return
-     */
-    public static boolean isNotEmpty(Object[] object){
-        return !isEmpty(object);
-    }
 
     /**
      * 判断一个Map是否为空
-     * @param map
+     * @param objects
      * @return
      */
-    public static boolean isEmpty(Map<?, ?> map){
-        Assert.isNull(map);
-        return map.isEmpty();
+    public static boolean isEmpty(Object[] objects){
+        return isNull(objects) || (objects.length == 0);
     }
 
-    public static boolean isNotEmpty(Map<?, ?> map){
-        return !isEmpty(map);
+    public static boolean isNotEmpty(Object[] objects){
+        return !isEmpty(objects);
     }
 
     /**
@@ -152,10 +133,10 @@ public class StringUtilsMycc extends Assert {
      * @param key
      * @param message
      */
-    public static void hasKeyAndValue(Map info, String key, String message) {
-        isNotNull(info, key, message);
-        hasLength(info.get(key) == null ? "" : info.get(key).toString(), message);
-    }
+//    public static void hasKeyAndValue(Map info, String key, String message) {
+//        isNotNull(info, key, message);
+//        hasLength(info.get(key) == null ? "" : info.get(key).toString(), message);
+//    }
 
 //    /**
 //     * 判断 jsonObject 是否为空
@@ -218,57 +199,57 @@ public class StringUtilsMycc extends Assert {
      * @param key
      * @param message
      */
-    public static void hasKeyByFlowData(JSONArray infos, String flowComponent, String key, String message) {
+//    public static void hasKeyByFlowData(JSONArray infos, String flowComponent, String key, String message) {
+//
+//        for (int infoIndex = 0; infoIndex < infos.size(); infoIndex++) {
+//            JSONObject _info = infos.getJSONObject(infoIndex);
+//            if (_info.containsKey(flowComponent) && _info.getString("flowComponent").equals(flowComponent)) {
+//                hasKeyAndValue(_info, key, message);
+//                break;
+//            }
+//        }
+//
+//    }
 
-        for (int infoIndex = 0; infoIndex < infos.size(); infoIndex++) {
-            JSONObject _info = infos.getJSONObject(infoIndex);
-            if (_info.containsKey(flowComponent) && _info.getString("flowComponent").equals(flowComponent)) {
-                hasKeyAndValue(_info, key, message);
-                break;
-            }
-        }
-
-    }
-
-    @SuppressWarnings("rawtypes")
-    public static boolean objIsEmpty(Object o) {
-        if (o == null) {
-            return true;
-        }
-        if (o instanceof String) {
-            if (o.toString().trim().equals("")) {
-                return true;
-            }
-            if (o.equals("null") || o.equals("NULL")) {
-                return true;
-            }
-        } else if (o instanceof List) {
-            if (((List) o).size() == 0) {
-                return true;
-            }
-        } else if (o instanceof Map) {
-            if (((Map) o).size() == 0) {
-                return true;
-            }
-        } else if (o instanceof Set) {
-            if (((Set) o).size() == 0) {
-                return true;
-            }
-        } else if (o instanceof Object[]) {
-            if (((Object[]) o).length == 0) {
-                return true;
-            }
-        } else if (o instanceof int[]) {
-            if (((int[]) o).length == 0) {
-                return true;
-            }
-        } else if (o instanceof long[]) {
-            if (((long[]) o).length == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    @SuppressWarnings("rawtypes")
+//    public static boolean objIsEmpty(Object o) {
+//        if (o == null) {
+//            return true;
+//        }
+//        if (o instanceof String) {
+//            if (o.toString().trim().equals("")) {
+//                return true;
+//            }
+//            if (o.equals("null") || o.equals("NULL")) {
+//                return true;
+//            }
+//        } else if (o instanceof List) {
+//            if (((List) o).size() == 0) {
+//                return true;
+//            }
+//        } else if (o instanceof Map) {
+//            if (((Map) o).size() == 0) {
+//                return true;
+//            }
+//        } else if (o instanceof Set) {
+//            if (((Set) o).size() == 0) {
+//                return true;
+//            }
+//        } else if (o instanceof Object[]) {
+//            if (((Object[]) o).length == 0) {
+//                return true;
+//            }
+//        } else if (o instanceof int[]) {
+//            if (((int[]) o).length == 0) {
+//                return true;
+//            }
+//        } else if (o instanceof long[]) {
+//            if (((long[]) o).length == 0) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 
 //    /**
@@ -284,21 +265,21 @@ public class StringUtilsMycc extends Assert {
 //        }
 //    }
 
-    public static void judgeAttrValue(JSONObject paramObj){
-        if (!paramObj.containsKey("attrs")) {
-            return;
-        }
-
-        JSONArray attrs = paramObj.getJSONArray("attrs");
-        if (attrs.size() < 1) {
-            return;
-        }
-        JSONObject attr = null;
-        for (int attrIndex = 0; attrIndex < attrs.size(); attrIndex++) {
-            attr = attrs.getJSONObject(attrIndex);
-            if (!"Y".equals(attr.getString("required"))) {
-                continue;
-            }
+//    public static void judgeAttrValue(JSONObject paramObj){
+//        if (!paramObj.containsKey("attrs")) {
+//            return;
+//        }
+//
+//        JSONArray attrs = paramObj.getJSONArray("attrs");
+//        if (attrs.size() < 1) {
+//            return;
+//        }
+//        JSONObject attr = null;
+//        for (int attrIndex = 0; attrIndex < attrs.size(); attrIndex++) {
+//            attr = attrs.getJSONObject(attrIndex);
+//            if (!"Y".equals(attr.getString("required"))) {
+//                continue;
+//            }
 //            Assert.hasKeyAndValue(attr, "value", attr.getString("specName") + "不能为空");
 //
 //            //整数
@@ -320,6 +301,4 @@ public class StringUtilsMycc extends Assert {
 //            if ("5005".equals(attr.getString("specValueType"))) {
 //                Assert.isDate(attr.getString("value"), DateUtil.DATE_FORMATE_STRING_A, attr.getString("specName") + "不是日期格式 YYYY-MM-DD hh:mm:ss");
 //            }
-        }
-    }
 }
