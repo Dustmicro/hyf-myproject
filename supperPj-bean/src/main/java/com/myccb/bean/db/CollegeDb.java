@@ -10,49 +10,33 @@ import lombok.Data;
 @Data
 @Builder
 public class CollegeDb {
-    private String CollegeName;
+    private String collegeName;
     /**成员**/
-    private String ClooegeMember;
+    private String clooegeMember;
     /**编号**/
     private String num;
     /**成员编号**/
-    private String MembeNum;
+    private String membeNum;
     private String address;
     private String status;
     private String tel;
     /**用户id**/
     private String userId;
 
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getCollegeName() {
-        return CollegeName;
+        return collegeName;
     }
 
     public void setCollegeName(String collegeName) {
-        CollegeName = collegeName;
+        this.collegeName = collegeName;
     }
 
     public String getClooegeMember() {
-        return ClooegeMember;
+        return clooegeMember;
     }
 
     public void setClooegeMember(String clooegeMember) {
-        ClooegeMember = clooegeMember;
+        this.clooegeMember = clooegeMember;
     }
 
     public String getNum() {
@@ -64,11 +48,11 @@ public class CollegeDb {
     }
 
     public String getMembeNum() {
-        return MembeNum;
+        return membeNum;
     }
 
     public void setMembeNum(String membeNum) {
-        MembeNum = membeNum;
+        this.membeNum = membeNum;
     }
 
     public String getAddress() {
@@ -85,5 +69,21 @@ public class CollegeDb {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

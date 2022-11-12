@@ -79,7 +79,7 @@ public class UserService {
     public static boolean CheckDepartment(Long userId, Integer departmentId, SqlSession sqlSession){
         boolean flag = false;
         UserDb department = sqlSession.getMapper(UserMapper.class).selectByPrimaryKey(userId);
-        if (departmentId.equals(department.getDepartmentId())){
+        if (departmentId.equals(department.getCollegeNum())){
             flag = true;
             logger.info("是该部门人员，可以操作！");
         }
