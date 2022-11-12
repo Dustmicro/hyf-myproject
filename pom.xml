@@ -17,6 +17,7 @@
         <module>framework-common-gateway</module>
         <module>supperPj-utils</module>
         <module>supperPj-boot</module>
+        <module>supperPj-core</module>
     </modules>
 
     <properties>
