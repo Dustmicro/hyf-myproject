@@ -21,9 +21,17 @@ public class UserDb {
     /**数据状态**/
     private String status;
     /**部门id**/
-    private Integer collegeNum;
+    private String collegeNum;
     /**部门名称**/
     private String collegeName;
+
+    public String getCollegeNum() {
+        return collegeNum;
+    }
+
+    public void setCollegeNum(String collegeNum) {
+        this.collegeNum = collegeNum;
+    }
 
     public String getCollegeName() {
         return collegeName;
@@ -31,14 +39,6 @@ public class UserDb {
 
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
-    }
-
-    public Integer getCollegeNum() {
-        return collegeNum;
-    }
-
-    public void setCollegeNum(Integer collegeNum) {
-        this.collegeNum = collegeNum;
     }
 
     public Integer getTel() {

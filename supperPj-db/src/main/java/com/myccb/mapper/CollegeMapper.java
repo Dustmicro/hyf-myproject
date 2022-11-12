@@ -18,7 +18,7 @@ public interface CollegeMapper {
 
     int insert(CollegeDb param);
 
-    int updateByPrimaryKeySelective (String userId);
+    int updateByPrimaryKeySelective (CollegeDb param);
 
     List<CollegeDb> findUserByPwd(CollegeDb CollegeDb);
 

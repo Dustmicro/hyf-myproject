@@ -5,9 +5,11 @@ import com.myccb.appmid.common.gateway.util.ServiceExceptionMycc;
 import com.myccb.appmid.service.process.Service;
 import com.myccb.bean.CollegeReq;
 import com.myccb.bean.db.CollegeDb;
+import com.myccb.bean.db.UserDb;
 import com.myccb.comm.StringUtilsMycc;
 import com.myccb.comm.constant.CommConstant;
 import com.myccb.mapper.CollegeMapper;
+import com.myccb.mapper.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,15 +83,51 @@ public class CollegeService {
         return CommConstant.SUCCESS;
     }
 
+    /**
+     * 修改部门服务
+     * @param collegeReq
+     * @param sqlSession
+     * @param appMidRequestHeader
+     * @return
+     * @throws ServiceExceptionMycc
+     */
     @Service("updateCollege")
     public String updateCollege (CollegeReq collegeReq, SqlSession sqlSession, AppMidRequestHeader appMidRequestHeader) throws ServiceExceptionMycc{
         logger.info("修改部门服务开始，请求参数，{}", collegeReq);
         Assert.isNull(collegeReq.getNum(), "必输项部门编号为空！");
         try {
-
-        } catch () {
-
+            CollegeDb db = SetReqToDb(collegeReq);
+            sqlSession.getMapper(CollegeMapper.class).updateByPrimaryKeySelective(db);
+            /**同时修改成员表信息**/
+            UserDb user = SetCollegeToUserDb(db);
+            sqlSession.getMapper(UserMapper.class).updateByPrimaryKeySelective(user.getUserId());
+        } catch (Exception e) {
+            logger.info("修改部门服务异常！");
+            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "修改部门服务异常！");
         }
+        return CommConstant.SUCCESS;
+    }
+
+    /**
+     * 新增部门服务
+     * @param collegeReq
+     * @param sqlSession
+     * @param appMidRequestHeader
+     * @return
+     * @throws ServiceExceptionMycc
+     */
+    @Service("insertCollege")
+    public String insertCollege (CollegeReq collegeReq, SqlSession sqlSession, AppMidRequestHeader appMidRequestHeader) throws ServiceExceptionMycc{
+        logger.info("新增部门服务开始，请求参数，{}", collegeReq);
+        try {
+            //应当添加一个权限校验
+            CollegeDb db = SetReqToDb(collegeReq);
+            sqlSession.getMapper(CollegeMapper.class).insert(db);
+        } catch (Exception e) {
+            logger.info("新增部门异常！！");
+            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "新增部门异常！！");
+        }
+        return CommConstant.SUCCESS;
     }
 
     /**
@@ -103,6 +141,14 @@ public class CollegeService {
                 .collegeName(collegeReq.getCollegeName())
                 .address(collegeReq.getAddress())
                 .membeNum(collegeReq.getClooegeMember())
+                .build();
+    }
+
+    private UserDb SetCollegeToUserDb(CollegeDb db){
+        return UserDb.builder()
+                .collegeNum(db.getNum())
+                .collegeName(db.getCollegeName())
+                .userId(db.getUserId())
                 .build();
     }
 }
