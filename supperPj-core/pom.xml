@@ -24,6 +24,12 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>com.myccb</groupId>
+            <artifactId>supperPj-utils</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>5.3.22</version>
@@ -32,6 +38,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>5.3.22</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
             <version>5.3.22</version>
             <scope>compile</scope>
         </dependency>
