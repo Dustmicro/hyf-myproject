@@ -11,5 +11,8 @@
         insert into User(user_name,age)
         value (#{userName,jdbcType=String},#{age,jdbcType=String})
     </insert>
+    <select id="find" parameterType="com.myccb.bean.db.UserDb">
+        select * from User where ()
+    </select>
 
 </mapper>
