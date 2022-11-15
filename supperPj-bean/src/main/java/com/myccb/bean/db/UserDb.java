@@ -11,19 +11,27 @@ public class UserDb {
     private String age;
     private String userId;
     /**账户名**/
-    private String name;
+    private String account;
     /**密码**/
     private String password;
     private Integer tel;
     private String address;
     /**用户权限**/
-    private Integer role;
+    private Integer permissions;
     /**数据状态**/
     private String status;
     /**部门id**/
     private String collegeNum;
     /**部门名称**/
     private String collegeName;
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
 
     public String getCollegeNum() {
         return collegeNum;
@@ -57,12 +65,12 @@ public class UserDb {
         this.address = address;
     }
 
-    public Integer getRole() {
-        return role;
+    public Integer getPermissions() {
+        return permissions;
     }
 
-    public void setRole(Integer role) {
-        this.role = role;
+    public void setPermissions(Integer permissions) {
+        this.permissions = permissions;
     }
 
     public String getStatus() {
@@ -71,14 +79,6 @@ public class UserDb {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPassword() {
