@@ -42,7 +42,7 @@ public class UserService {
      */
     public UserDb findUserByPwd(String name, String password){
         UserDb db = UserDb.builder()
-                .name(name)
+                .userName(name)
                 .password(password)
                 .build();
         List<UserDb> list = userMapper.findUserByPwd(db);
