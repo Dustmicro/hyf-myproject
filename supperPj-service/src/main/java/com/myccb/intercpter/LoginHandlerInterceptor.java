@@ -1,7 +1,6 @@
 package com.myccb.intercpter;
 
 import com.myccb.comm.redis.JWTCache;
-import com.myccb.mapper.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -6,10 +6,9 @@ import com.myccb.appmid.service.process.Service;
 import com.myccb.bean.CollegeReq;
 import com.myccb.bean.db.CollegeDb;
 import com.myccb.bean.db.UserDb;
-import com.myccb.comm.StringUtilsMycc;
 import com.myccb.comm.constant.CommConstant;
 import com.myccb.mapper.CollegeMapper;
-import com.myccb.mapper.UserMapper;
+import com.myccb.mapper.UserDbMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,7 +99,7 @@ public class CollegeService {
             sqlSession.getMapper(CollegeMapper.class).updateByPrimaryKeySelective(db);
             /**同时修改成员表信息**/
             UserDb user = SetCollegeToUserDb(db);
-            sqlSession.getMapper(UserMapper.class).updateByPrimaryKeySelective(user.getUserId());
+            sqlSession.getMapper(UserDbMapper.class).updateByPrimaryKeySelective(user);
         } catch (Exception e) {
             logger.info("修改部门服务异常！");
             throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "修改部门服务异常！");

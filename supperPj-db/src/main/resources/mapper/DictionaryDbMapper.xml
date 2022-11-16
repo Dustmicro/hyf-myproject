@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.DictionaryDbMapper">
+  <resultMap id="BaseResultMap" type="com.example.bean.db.DictionaryDb">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dic_dictionary" jdbcType="VARCHAR" property="dicDictionary" />
+    <result column="dic_num" jdbcType="VARCHAR" property="dicNum" />
+    <result column="status_cd" jdbcType="VARCHAR" property="statusCd" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dic_dictionary, dic_num, status_cd, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_dictionary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from u_dictionary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.bean.db.DictionaryDb">
+    insert into u_dictionary (id, dic_dictionary, dic_num, 
+      status_cd, create_time)
+    values (#{id,jdbcType=INTEGER}, #{dicDictionary,jdbcType=VARCHAR}, #{dicNum,jdbcType=VARCHAR}, 
+      #{statusCd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bean.db.DictionaryDb">
+    insert into u_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dicDictionary != null">
+        dic_dictionary,
+      </if>
+      <if test="dicNum != null">
+        dic_num,
+      </if>
+      <if test="statusCd != null">
+        status_cd,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dicDictionary != null">
+        #{dicDictionary,jdbcType=VARCHAR},
+      </if>
+      <if test="dicNum != null">
+        #{dicNum,jdbcType=VARCHAR},
+      </if>
+      <if test="statusCd != null">
+        #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bean.db.DictionaryDb">
+    update u_dictionary
+    <set>
+      <if test="dicDictionary != null">
+        dic_dictionary = #{dicDictionary,jdbcType=VARCHAR},
+      </if>
+      <if test="dicNum != null">
+        dic_num = #{dicNum,jdbcType=VARCHAR},
+      </if>
+      <if test="statusCd != null">
+        status_cd = #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bean.db.DictionaryDb">
+    update u_dictionary
+    set dic_dictionary = #{dicDictionary,jdbcType=VARCHAR},
+      dic_num = #{dicNum,jdbcType=VARCHAR},
+      status_cd = #{statusCd,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <sql id="base_query">
+    <trim prefix="WHERE" prefixOverrides="AND | OR">
+      <if test="null != id">
+        andt.idt.id=#{id,jdbcType=INTEGER}
+      </if>
+      <if test="null != dicDictionary">
+        andt.dic_dictionaryt.dic_dictionary=#{dicDictionary,jdbcType=VARCHAR}
+      </if>
+      <if test="null != dicNum">
+        andt.dic_numt.dic_num=#{dicNum,jdbcType=VARCHAR}
+      </if>
+      <if test="null != statusCd">
+        andt.status_cdt.status_cd=#{statusCd,jdbcType=VARCHAR}
+      </if>
+      <if test="null != createTime">
+        andt.create_timet.create_time=#{createTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </sql>
+  <select id="find" parameterType="com.example.bean.db.DictionaryDb" resultMap="BaseResultMap">
+    selectt.*fromu_dictionary t
+    <include refid="base_query" />
+  </select>
+  <select id="list" parameterType="com.example.bean.db.DictionaryDb" resultMap="BaseResultMap">
+    selectt.*fromu_dictionary t
+    <include refid="base_query" />
+  </select>
+</mapper>

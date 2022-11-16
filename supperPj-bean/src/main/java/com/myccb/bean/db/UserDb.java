@@ -1,52 +1,75 @@
 package com.myccb.bean.db;
 
-
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Builder
-public class UserDb {
-    private String userName;
-    private String age;
+public class UserDb implements Serializable {
+    private Integer id;
+
     private String userId;
-    /**账户名**/
-    private String account;
-    /**密码**/
-    private String password;
+
+    private String userName;
+
+    private Integer age;
+
     private Integer tel;
-    private String address;
-    /**用户权限**/
+
+    private Double size;
+
+    private Integer account;
+
+    private String password;
+
     private Integer permissions;
-    /**数据状态**/
-    private String status;
-    /**部门id**/
+
     private String collegeNum;
-    /**部门名称**/
+
     private String collegeName;
 
-    public String getAccount() {
-        return account;
+    private String address;
+
+    private String eMail;
+
+    private String uMark;
+
+    private Integer statusCd;
+
+    private static final long serialVersionUID = 1L;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getCollegeNum() {
-        return collegeNum;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setCollegeNum(String collegeNum) {
-        this.collegeNum = collegeNum;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getCollegeName() {
-        return collegeName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCollegeName(String collegeName) {
-        this.collegeName = collegeName;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public Integer getTel() {
@@ -57,12 +80,28 @@ public class UserDb {
         this.tel = tel;
     }
 
-    public String getAddress() {
-        return address;
+    public Double getSize() {
+        return size;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setSize(Double size) {
+        this.size = size;
+    }
+
+    public Integer getAccount() {
+        return account;
+    }
+
+    public void setAccount(Integer account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public Integer getPermissions() {
@@ -73,43 +112,51 @@ public class UserDb {
         this.permissions = permissions;
     }
 
-    public String getStatus() {
-        return status;
+    public String getCollegeNum() {
+        return collegeNum;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCollegeNum(String collegeNum) {
+        this.collegeNum = collegeNum == null ? null : collegeNum.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getCollegeName() {
+        return collegeName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName == null ? null : collegeName.trim();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
     }
 
-    public String getUserName() {
-        return userName;
+    public String geteMail() {
+        return eMail;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void seteMail(String eMail) {
+        this.eMail = eMail == null ? null : eMail.trim();
     }
 
-    public String getAge() {
-        return age;
+    public String getuMark() {
+        return uMark;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setuMark(String uMark) {
+        this.uMark = uMark == null ? null : uMark.trim();
+    }
+
+    public Integer getStatusCd() {
+        return statusCd;
+    }
+
+    public void setStatusCd(Integer statusCd) {
+        this.statusCd = statusCd;
     }
 }

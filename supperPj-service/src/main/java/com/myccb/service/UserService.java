@@ -3,7 +3,7 @@ package com.myccb.service;
 
 import com.myccb.bean.db.UserDb;
 import com.myccb.comm.StringUtilsMycc;
-import com.myccb.mapper.UserMapper;
+import com.myccb.mapper.UserDbMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,14 +23,14 @@ public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
-    UserMapper userMapper;
+    UserDbMapper userMapper;
 
     /**
      * 通过用户id查询用户
      * @param userId
      * @return
      */
-    public UserDb findUserById(Long userId){
+    public UserDb findUserById(Integer userId){
         return userMapper.selectByPrimaryKey(userId);
     }
 
@@ -45,7 +45,7 @@ public class UserService {
                 .userName(name)
                 .password(password)
                 .build();
-        List<UserDb> list = userMapper.findUserByPwd(db);
+        List<UserDb> list = (List<UserDb>) userMapper.findUserByPwd(db);
         if (StringUtilsMycc.isNotEmpty(list)){
             return list.get(0);
         }
@@ -58,17 +58,17 @@ public class UserService {
      * @param serviceId
      * @return
      */
-    public boolean CheckRole(String userId, String serviceId){
-        boolean flag = false;
-        Map<String, String> map = new HashMap<>();
-        map.put("userId", userId);
-        map.put("serviceId", serviceId);
-        List<UserDb> list = userMapper.selectUserRole(map);
-        if (StringUtilsMycc.isNotEmpty(list)){
-            flag = true;
-        }
-        return flag;
-    }
+//    public boolean CheckRole(String userId, String serviceId){
+//        boolean flag = false;
+//        Map<String, String> map = new HashMap<>();
+//        map.put("userId", userId);
+//        map.put("serviceId", serviceId);
+//        List<UserDb> list = userMapper.selectUserRole(map);
+//        if (StringUtilsMycc.isNotEmpty(list)){
+//            flag = true;
+//        }
+//        return flag;
+//    }
 
     /**
      * 是否本部门校验
@@ -76,9 +76,9 @@ public class UserService {
      * @param departmentId
      * @return
      */
-    public static boolean CheckDepartment(Long userId, Integer departmentId, SqlSession sqlSession){
+    public static boolean CheckDepartment(Integer userId, Integer departmentId, SqlSession sqlSession){
         boolean flag = false;
-        UserDb department = sqlSession.getMapper(UserMapper.class).selectByPrimaryKey(userId);
+        UserDb department = sqlSession.getMapper(UserDbMapper.class).selectByPrimaryKey(userId);
         if (departmentId.equals(department.getCollegeNum())){
             flag = true;
             logger.info("是该部门人员，可以操作！");

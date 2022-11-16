@@ -2,8 +2,8 @@ package com.myccb.bean;
 
 public class UserReq {
     private String userName;
-    private String age;
-    private String userId;
+    private Integer age;
+    private Integer userId;
     private Integer departmentId;
 
     public Integer getDepartmentId() {
@@ -14,11 +14,11 @@ public class UserReq {
         this.departmentId = departmentId;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -30,11 +30,11 @@ public class UserReq {
         this.userName = userName;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 }

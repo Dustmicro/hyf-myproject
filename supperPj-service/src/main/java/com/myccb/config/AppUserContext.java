@@ -1,7 +1,5 @@
 package com.myccb.config;
 
-import com.myccb.bean.db.UserDb;
-
 /**
  * 登录通过userInfo可获取到登录的用户信息
  * @author 黄弋峰 2022/11/16
