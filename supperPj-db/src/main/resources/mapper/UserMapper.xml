@@ -5,11 +5,58 @@
         <id column="user_id" jdbcType="Integer" property="userId"/>
         <result column="user_name" jdbcType="String" property="userName"/>
         <result column="age" jdbcType="Integer" property="age"/>
+        <result column="account" jdbcType="String" property="account"/>
+        <result column="password" jdbcType="String" property="password"/>
+        <result column="tel" jdbcType="Integer" property="tel"/>
+        <result column="address" jdbcType="String" property="address"/>
+        <result column="permissions" jdbcType="Integer" property="permissions"/>
+        <result column="status" jdbcType="Integer" property="status"/>
+        <result column="college_num" jdbcType="String" property="collegeNum"/>
+        <result column="college_name" jdbcType="String" property="collegeName"/>
+
     </resultMap>
 
     <insert id="insert" parameterType="com.myccb.bean.db.UserDb">
-        insert into User(user_name,age)
-        value (#{userName,jdbcType=String},#{age,jdbcType=String})
+        insert into User(user_id,age,user_name,account,password,tel,address,permissions,status,college_num,college_name)
+        value (#{userName,jdbcType=String},#{age,jdbcType=Integer},#{userId,jdbcType=Integer},#{account,jdbcType=String},#{password,jdbcType=String},
+        #{tel,jdbcType=Integer},#{address,jdbcType=String},#{permissions,jdbcType=Integer},#{status,jdbcType=Integer},#{collegeNum,jdbcType=String},#{collegeName,jdbcType=String})
     </insert>
+    <select id="find" parameterType="com.myccb.bean.db.UserDb">
+        select * from User
+        where 1=1
+        <if test="userId !=null and userId != ''">
+            and t.user_id= #{userId}
+        </if>
+        <if test="age !=null and age != ''">
+            and t.age= #{age}
+        </if>
+        <if test="userName !=null and userName != ''">
+            and t.user_name= #{userId}
+        </if>
+        <if test="account !=null and account != ''">
+            and t.account= #{account}
+        </if>
+        <if test="password !=null and password != ''">
+            and t.password= #{password}
+        </if>
+        <if test="tel !=null and tel != ''">
+            and t.tel= #{tel}
+        </if>
+        <if test="address !=null and address != ''">
+            and t.address= #{address}
+        </if>
+        <if test="permissions !=null and permissions != ''">
+            and t.permissions= #{permissions}
+        </if>
+        <if test="status !=null and status != ''">
+            and t.status= #{status}
+        </if>
+        <if test="collegeNum !=null and collegeNum != ''">
+            and t.college_num= #{userId}
+        </if>
+        <if test="collegeName !=null and collegeName != ''">
+            and t.college_name= #{userId}
+        </if>
+    </select>
 
 </mapper>
