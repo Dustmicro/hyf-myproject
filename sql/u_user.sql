@@ -3,15 +3,15 @@
 
  Source Server         : hyf
  Source Server Type    : MySQL
- Source Server Version : 80029
+ Source Server Version : 80031
  Source Host           : localhost:3306
  Source Schema         : supperpj
 
  Target Server Type    : MySQL
- Target Server Version : 80029
+ Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 17/11/2022 19:45:59
+ Date: 18/11/2022 00:57:32
 */
 
 SET NAMES utf8mb4;

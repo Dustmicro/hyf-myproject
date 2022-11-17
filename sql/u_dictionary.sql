@@ -3,15 +3,15 @@
 
  Source Server         : hyf
  Source Server Type    : MySQL
- Source Server Version : 80029
+ Source Server Version : 80031
  Source Host           : localhost:3306
  Source Schema         : supperpj
 
  Target Server Type    : MySQL
- Target Server Version : 80029
+ Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 17/11/2022 19:45:49
+ Date: 18/11/2022 00:57:17
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `u_dictionary`  (
   `create_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `mark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述',
   PRIMARY KEY (`dic_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典值表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典值表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of u_dictionary
