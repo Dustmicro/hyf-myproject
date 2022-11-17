@@ -2,110 +2,140 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.DictionaryDbMapper">
   <resultMap id="BaseResultMap" type="com.example.bean.db.DictionaryDb">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="dic_dictionary" jdbcType="VARCHAR" property="dicDictionary" />
-    <result column="dic_num" jdbcType="VARCHAR" property="dicNum" />
+    <id column="dic_id" jdbcType="INTEGER" property="dicId" />
+    <result column="dic_name" jdbcType="VARCHAR" property="dicName" />
+    <result column="dic_type_id" jdbcType="VARCHAR" property="dicTypeId" />
     <result column="status_cd" jdbcType="VARCHAR" property="statusCd" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, dic_dictionary, dic_num, status_cd, create_time
+    dic_id, dic_name, dic_type_id, status_cd, update_time, create_time, mark
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from u_dictionary
-    where id = #{id,jdbcType=INTEGER}
+    where dic_id = #{dicId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from u_dictionary
-    where id = #{id,jdbcType=INTEGER}
+    where dic_id = #{dicId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.bean.db.DictionaryDb">
-    insert into u_dictionary (id, dic_dictionary, dic_num, 
-      status_cd, create_time)
-    values (#{id,jdbcType=INTEGER}, #{dicDictionary,jdbcType=VARCHAR}, #{dicNum,jdbcType=VARCHAR}, 
-      #{statusCd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    insert into u_dictionary (dic_id, dic_name, dic_type_id, 
+      status_cd, update_time, create_time, 
+      mark)
+    values (#{dicId,jdbcType=INTEGER}, #{dicName,jdbcType=VARCHAR}, #{dicTypeId,jdbcType=VARCHAR}, 
+      #{statusCd,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{mark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.bean.db.DictionaryDb">
     insert into u_dictionary
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="dicId != null">
+        dic_id,
       </if>
-      <if test="dicDictionary != null">
-        dic_dictionary,
+      <if test="dicName != null">
+        dic_name,
       </if>
-      <if test="dicNum != null">
-        dic_num,
+      <if test="dicTypeId != null">
+        dic_type_id,
       </if>
       <if test="statusCd != null">
         status_cd,
       </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
+      <if test="mark != null">
+        mark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="dicId != null">
+        #{dicId,jdbcType=INTEGER},
       </if>
-      <if test="dicDictionary != null">
-        #{dicDictionary,jdbcType=VARCHAR},
+      <if test="dicName != null">
+        #{dicName,jdbcType=VARCHAR},
       </if>
-      <if test="dicNum != null">
-        #{dicNum,jdbcType=VARCHAR},
+      <if test="dicTypeId != null">
+        #{dicTypeId,jdbcType=VARCHAR},
       </if>
       <if test="statusCd != null">
         #{statusCd,jdbcType=VARCHAR},
       </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.bean.db.DictionaryDb">
     update u_dictionary
     <set>
-      <if test="dicDictionary != null">
-        dic_dictionary = #{dicDictionary,jdbcType=VARCHAR},
+      <if test="dicName != null">
+        dic_name = #{dicName,jdbcType=VARCHAR},
       </if>
-      <if test="dicNum != null">
-        dic_num = #{dicNum,jdbcType=VARCHAR},
+      <if test="dicTypeId != null">
+        dic_type_id = #{dicTypeId,jdbcType=VARCHAR},
       </if>
       <if test="statusCd != null">
         status_cd = #{statusCd,jdbcType=VARCHAR},
       </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where dic_id = #{dicId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.bean.db.DictionaryDb">
     update u_dictionary
-    set dic_dictionary = #{dicDictionary,jdbcType=VARCHAR},
-      dic_num = #{dicNum,jdbcType=VARCHAR},
+    set dic_name = #{dicName,jdbcType=VARCHAR},
+      dic_type_id = #{dicTypeId,jdbcType=VARCHAR},
       status_cd = #{statusCd,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      mark = #{mark,jdbcType=VARCHAR}
+    where dic_id = #{dicId,jdbcType=INTEGER}
   </update>
   <sql id="base_query">
     <trim prefix="WHERE" prefixOverrides="AND | OR">
-      <if test="null != id">
-        andt.idt.id=#{id,jdbcType=INTEGER}
+      <if test="null != dicId">
+        andt.dic_idt.dic_id=#{dicId,jdbcType=INTEGER}
       </if>
-      <if test="null != dicDictionary">
-        andt.dic_dictionaryt.dic_dictionary=#{dicDictionary,jdbcType=VARCHAR}
+      <if test="null != dicName">
+        andt.dic_namet.dic_name=#{dicName,jdbcType=VARCHAR}
       </if>
-      <if test="null != dicNum">
-        andt.dic_numt.dic_num=#{dicNum,jdbcType=VARCHAR}
+      <if test="null != dicTypeId">
+        andt.dic_type_idt.dic_type_id=#{dicTypeId,jdbcType=VARCHAR}
       </if>
       <if test="null != statusCd">
         andt.status_cdt.status_cd=#{statusCd,jdbcType=VARCHAR}
       </if>
+      <if test="null != updateTime">
+        andt.update_timet.update_time=#{updateTime,jdbcType=TIMESTAMP}
+      </if>
       <if test="null != createTime">
         andt.create_timet.create_time=#{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="null != mark">
+        andt.markt.mark=#{mark,jdbcType=VARCHAR}
       </if>
     </trim>
   </sql>

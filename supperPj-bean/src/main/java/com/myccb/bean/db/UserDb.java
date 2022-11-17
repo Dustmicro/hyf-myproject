@@ -4,23 +4,22 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Builder
 public class UserDb implements Serializable {
-    private Integer id;
-
     private String userId;
 
     private String userName;
 
     private Integer age;
 
-    private Integer tel;
+    private Long tel;
 
     private Double size;
 
-    private Integer account;
+    private Long account;
 
     private String password;
 
@@ -38,15 +37,11 @@ public class UserDb implements Serializable {
 
     private Integer statusCd;
 
+    private Date createTime;
+
+    private Date updateTime;
+
     private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUserId() {
         return userId;
@@ -72,11 +67,11 @@ public class UserDb implements Serializable {
         this.age = age;
     }
 
-    public Integer getTel() {
+    public Long getTel() {
         return tel;
     }
 
-    public void setTel(Integer tel) {
+    public void setTel(Long tel) {
         this.tel = tel;
     }
 
@@ -88,11 +83,11 @@ public class UserDb implements Serializable {
         this.size = size;
     }
 
-    public Integer getAccount() {
+    public Long getAccount() {
         return account;
     }
 
-    public void setAccount(Integer account) {
+    public void setAccount(Long account) {
         this.account = account;
     }
 
@@ -158,5 +153,21 @@ public class UserDb implements Serializable {
 
     public void setStatusCd(Integer statusCd) {
         this.statusCd = statusCd;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

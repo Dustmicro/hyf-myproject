@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.CollegeDbMapper">
+  <resultMap id="BaseResultMap" type="com.example.bean.db.CollegeDb">
+    <id column="college_num" jdbcType="VARCHAR" property="collegeNum" />
+    <result column="college_name" jdbcType="VARCHAR" property="collegeName" />
+    <result column="college_member" jdbcType="VARCHAR" property="collegeMember" />
+    <result column="membe_num" jdbcType="VARCHAR" property="membeNum" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="tel" jdbcType="BIGINT" property="tel" />
+    <result column="status_cd" jdbcType="INTEGER" property="statusCd" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    college_num, college_name, college_member, membe_num, address, tel, status_cd, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_college
+    where college_num = #{collegeNum,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from u_college
+    where college_num = #{collegeNum,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.bean.db.CollegeDb">
+    insert into u_college (college_num, college_name, college_member, 
+      membe_num, address, tel, 
+      status_cd, create_time)
+    values (#{collegeNum,jdbcType=VARCHAR}, #{collegeName,jdbcType=VARCHAR}, #{collegeMember,jdbcType=VARCHAR}, 
+      #{membeNum,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{tel,jdbcType=BIGINT}, 
+      #{statusCd,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bean.db.CollegeDb">
+    insert into u_college
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="collegeNum != null">
+        college_num,
+      </if>
+      <if test="collegeName != null">
+        college_name,
+      </if>
+      <if test="collegeMember != null">
+        college_member,
+      </if>
+      <if test="membeNum != null">
+        membe_num,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="statusCd != null">
+        status_cd,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="collegeNum != null">
+        #{collegeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeName != null">
+        #{collegeName,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeMember != null">
+        #{collegeMember,jdbcType=VARCHAR},
+      </if>
+      <if test="membeNum != null">
+        #{membeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=BIGINT},
+      </if>
+      <if test="statusCd != null">
+        #{statusCd,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bean.db.CollegeDb">
+    update u_college
+    <set>
+      <if test="collegeName != null">
+        college_name = #{collegeName,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeMember != null">
+        college_member = #{collegeMember,jdbcType=VARCHAR},
+      </if>
+      <if test="membeNum != null">
+        membe_num = #{membeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=BIGINT},
+      </if>
+      <if test="statusCd != null">
+        status_cd = #{statusCd,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where college_num = #{collegeNum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bean.db.CollegeDb">
+    update u_college
+    set college_name = #{collegeName,jdbcType=VARCHAR},
+      college_member = #{collegeMember,jdbcType=VARCHAR},
+      membe_num = #{membeNum,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=BIGINT},
+      status_cd = #{statusCd,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where college_num = #{collegeNum,jdbcType=VARCHAR}
+  </update>
+  <sql id="base_query">
+    <trim prefix="WHERE" prefixOverrides="AND | OR">
+      <if test="null != collegeNum">
+        andt.college_numt.college_num=#{collegeNum,jdbcType=VARCHAR}
+      </if>
+      <if test="null != collegeName">
+        andt.college_namet.college_name=#{collegeName,jdbcType=VARCHAR}
+      </if>
+      <if test="null != collegeMember">
+        andt.college_membert.college_member=#{collegeMember,jdbcType=VARCHAR}
+      </if>
+      <if test="null != membeNum">
+        andt.membe_numt.membe_num=#{membeNum,jdbcType=VARCHAR}
+      </if>
+      <if test="null != address">
+        andt.addresst.address=#{address,jdbcType=VARCHAR}
+      </if>
+      <if test="null != tel">
+        andt.telt.tel=#{tel,jdbcType=BIGINT}
+      </if>
+      <if test="null != statusCd">
+        andt.status_cdt.status_cd=#{statusCd,jdbcType=INTEGER}
+      </if>
+      <if test="null != createTime">
+        andt.create_timet.create_time=#{createTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </sql>
+  <select id="find" parameterType="com.example.bean.db.CollegeDb" resultMap="BaseResultMap">
+    selectt.*fromu_college t
+    <include refid="base_query" />
+  </select>
+  <select id="list" parameterType="com.example.bean.db.CollegeDb" resultMap="BaseResultMap">
+    selectt.*fromu_college t
+    <include refid="base_query" />
+  </select>
+</mapper>

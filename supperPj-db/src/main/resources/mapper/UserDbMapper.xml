@@ -2,13 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.UserDbMapper">
   <resultMap id="BaseResultMap" type="com.example.bean.db.UserDb">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="tel" jdbcType="INTEGER" property="tel" />
+    <result column="tel" jdbcType="BIGINT" property="tel" />
     <result column="size" jdbcType="DOUBLE" property="size" />
-    <result column="account" jdbcType="INTEGER" property="account" />
+    <result column="account" jdbcType="BIGINT" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="permissions" jdbcType="INTEGER" property="permissions" />
     <result column="college_num" jdbcType="VARCHAR" property="collegeNum" />
@@ -17,39 +16,40 @@
     <result column="e_mail" jdbcType="VARCHAR" property="eMail" />
     <result column="u_mark" jdbcType="VARCHAR" property="uMark" />
     <result column="status_cd" jdbcType="INTEGER" property="statusCd" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, user_name, age, tel, size, account, password, permissions, college_num, 
-    college_name, address, e_mail, u_mark, status_cd
+    user_id, user_name, age, tel, size, account, password, permissions, college_num, 
+    college_name, address, e_mail, u_mark, status_cd, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from u_user
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from u_user
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.example.bean.db.UserDb">
-    insert into u_user (id, user_id, user_name, 
-      age, tel, size, account, 
-      password, permissions, college_num, 
-      college_name, address, e_mail, 
-      u_mark, status_cd)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{tel,jdbcType=INTEGER}, #{size,jdbcType=DOUBLE}, #{account,jdbcType=INTEGER}, 
-      #{password,jdbcType=VARCHAR}, #{permissions,jdbcType=INTEGER}, #{collegeNum,jdbcType=VARCHAR}, 
-      #{collegeName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, 
-      #{uMark,jdbcType=VARCHAR}, #{statusCd,jdbcType=INTEGER})
+    insert into u_user (user_id, user_name, age, 
+      tel, size, account, password, 
+      permissions, college_num, college_name, 
+      address, e_mail, u_mark, 
+      status_cd, create_time, update_time
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{tel,jdbcType=BIGINT}, #{size,jdbcType=DOUBLE}, #{account,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, 
+      #{permissions,jdbcType=INTEGER}, #{collegeNum,jdbcType=VARCHAR}, #{collegeName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, #{uMark,jdbcType=VARCHAR}, 
+      #{statusCd,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.bean.db.UserDb">
     insert into u_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="userId != null">
         user_id,
       </if>
@@ -92,11 +92,14 @@
       <if test="statusCd != null">
         status_cd,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
@@ -107,13 +110,13 @@
         #{age,jdbcType=INTEGER},
       </if>
       <if test="tel != null">
-        #{tel,jdbcType=INTEGER},
+        #{tel,jdbcType=BIGINT},
       </if>
       <if test="size != null">
         #{size,jdbcType=DOUBLE},
       </if>
       <if test="account != null">
-        #{account,jdbcType=INTEGER},
+        #{account,jdbcType=BIGINT},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -139,14 +142,17 @@
       <if test="statusCd != null">
         #{statusCd,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.bean.db.UserDb">
     update u_user
     <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
@@ -154,13 +160,13 @@
         age = #{age,jdbcType=INTEGER},
       </if>
       <if test="tel != null">
-        tel = #{tel,jdbcType=INTEGER},
+        tel = #{tel,jdbcType=BIGINT},
       </if>
       <if test="size != null">
         size = #{size,jdbcType=DOUBLE},
       </if>
       <if test="account != null">
-        account = #{account,jdbcType=INTEGER},
+        account = #{account,jdbcType=BIGINT},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -186,17 +192,22 @@
       <if test="statusCd != null">
         status_cd = #{statusCd,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.bean.db.UserDb">
     update u_user
-    set user_id = #{userId,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
+    set user_name = #{userName,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
-      tel = #{tel,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=BIGINT},
       size = #{size,jdbcType=DOUBLE},
-      account = #{account,jdbcType=INTEGER},
+      account = #{account,jdbcType=BIGINT},
       password = #{password,jdbcType=VARCHAR},
       permissions = #{permissions,jdbcType=INTEGER},
       college_num = #{collegeNum,jdbcType=VARCHAR},
@@ -204,14 +215,13 @@
       address = #{address,jdbcType=VARCHAR},
       e_mail = #{eMail,jdbcType=VARCHAR},
       u_mark = #{uMark,jdbcType=VARCHAR},
-      status_cd = #{statusCd,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      status_cd = #{statusCd,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   <sql id="base_query">
     <trim prefix="WHERE" prefixOverrides="AND | OR">
-      <if test="null != id">
-        andt.idt.id=#{id,jdbcType=INTEGER}
-      </if>
       <if test="null != userId">
         andt.user_idt.user_id=#{userId,jdbcType=VARCHAR}
       </if>
@@ -222,13 +232,13 @@
         andt.aget.age=#{age,jdbcType=INTEGER}
       </if>
       <if test="null != tel">
-        andt.telt.tel=#{tel,jdbcType=INTEGER}
+        andt.telt.tel=#{tel,jdbcType=BIGINT}
       </if>
       <if test="null != size">
         andt.sizet.size=#{size,jdbcType=DOUBLE}
       </if>
       <if test="null != account">
-        andt.accountt.account=#{account,jdbcType=INTEGER}
+        andt.accountt.account=#{account,jdbcType=BIGINT}
       </if>
       <if test="null != password">
         andt.passwordt.password=#{password,jdbcType=VARCHAR}
@@ -253,6 +263,12 @@
       </if>
       <if test="null != statusCd">
         andt.status_cdt.status_cd=#{statusCd,jdbcType=INTEGER}
+      </if>
+      <if test="null != createTime">
+        andt.create_timet.create_time=#{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="null != updateTime">
+        andt.update_timet.update_time=#{updateTime,jdbcType=TIMESTAMP}
       </if>
     </trim>
   </sql>

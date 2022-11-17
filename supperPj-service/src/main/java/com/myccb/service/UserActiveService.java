@@ -2,13 +2,14 @@ package com.myccb.service;
 
 import com.myccb.appmid.common.gateway.rewrite.AppMidRequestHeader;
 import com.myccb.appmid.service.process.Service;
-import com.myccb.bean.CollegeReq;
+import com.myccb.bean.CollegeUserReq;
 import com.myccb.bean.UserReq;
+import com.myccb.bean.db.CollegeUserDb;
 import com.myccb.bean.db.UserDb;
 import com.myccb.comm.CommService;
 import com.myccb.comm.StringUtilsMycc;
 import com.myccb.comm.constant.CommConstant;
-import com.myccb.mapper.CollegeMapper;
+import com.myccb.mapper.CollegeUserDbMapper;
 import com.myccb.mapper.UserDbMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -16,10 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.myccb.appmid.common.gateway.util.ServiceExceptionMycc;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -138,19 +136,19 @@ public class UserActiveService {
         try {
             UserDb db = SetReqToDb(userReq);
             //查询用户权限
-            UserDb role = sqlSession.getMapper(UserDbMapper.class).selectByPrimaryKey(db.getId());
+            UserDb role = sqlSession.getMapper(UserDbMapper.class).selectByPrimaryKey(db.getUserId());
             if ("1".equals(role.getAccount())){
                 logger.info("该用户拥有权限，允许操作！");
-                sqlSession.getMapper(UserDbMapper.class).deleteByPrimaryKey(db.getId());
+                sqlSession.getMapper(UserDbMapper.class).deleteByPrimaryKey(db.getUserId());
             } else {
                 throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该用户没有权限，禁止该操作！");
             }
             UserService.CheckDepartment(userReq.getUserId(),userReq.getDepartmentId(),sqlSession);
-            CollegeReq collegeReq = new CollegeReq();
-            collegeReq.setNum(String.valueOf(userReq.getUserId()));
+            CollegeUserReq collegeUserReq = new CollegeUserReq();
+            collegeUserReq.setCollegeNum(String.valueOf(userReq.getUserId()));
             //查询该成员是否还有部门信息
-            List<UserReq> list = (List<UserReq>) sqlSession.getMapper(CollegeMapper.class).selectByPrimaryKey(collegeReq.getNum());
-            if (StringUtilsMycc.isEmpty(list)){
+            List<CollegeUserDb> list = Collections.singletonList(sqlSession.getMapper(CollegeUserDbMapper.class).selectByPrimaryKey(collegeUserReq.getCollegeNum()));
+            if (!StringUtilsMycc.isEmpty(list)){
                 throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"该成员关联的有部门信息不能删除！！");
             }
         } catch (ServiceExceptionMycc e){

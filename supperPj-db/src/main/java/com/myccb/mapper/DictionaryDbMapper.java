@@ -1,20 +1,20 @@
 package com.myccb.mapper;
 
+import com.github.pagehelper.Page;
 import com.myccb.bean.db.DictionaryDb;
 import org.apache.ibatis.annotations.Mapper;
-import com.github.pagehelper.Page;
 
 import java.util.List;
 
 @Mapper
 public interface DictionaryDbMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer dicId);
 
     int insert(DictionaryDb record);
 
     int insertSelective(DictionaryDb record);
 
-    DictionaryDb selectByPrimaryKey(Integer id);
+    DictionaryDb selectByPrimaryKey(Integer dicId);
 
     int updateByPrimaryKeySelective(DictionaryDb record);
 

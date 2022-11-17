@@ -31,7 +31,7 @@ public class UserService {
      * @return
      */
     public UserDb findUserById(Integer userId){
-        return userMapper.selectByPrimaryKey(userId);
+        return userMapper.selectByPrimaryKey(String.valueOf(userId));
     }
 
     /**
@@ -58,17 +58,17 @@ public class UserService {
      * @param serviceId
      * @return
      */
-//    public boolean CheckRole(String userId, String serviceId){
-//        boolean flag = false;
-//        Map<String, String> map = new HashMap<>();
-//        map.put("userId", userId);
-//        map.put("serviceId", serviceId);
-//        List<UserDb> list = userMapper.selectUserRole(map);
-//        if (StringUtilsMycc.isNotEmpty(list)){
-//            flag = true;
-//        }
-//        return flag;
-//    }
+    public boolean CheckRole(String userId, String serviceId){
+        boolean flag = false;
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("serviceId", serviceId);
+        List<UserDb> list = (List<UserDb>) userMapper.selectUserRole(map);
+        if (StringUtilsMycc.isNotEmpty(list)){
+            flag = true;
+        }
+        return flag;
+    }
 
     /**
      * 是否本部门校验
@@ -78,7 +78,7 @@ public class UserService {
      */
     public static boolean CheckDepartment(Integer userId, Integer departmentId, SqlSession sqlSession){
         boolean flag = false;
-        UserDb department = sqlSession.getMapper(UserDbMapper.class).selectByPrimaryKey(userId);
+        UserDb department = sqlSession.getMapper(UserDbMapper.class).selectByPrimaryKey(String.valueOf(userId));
         if (departmentId.equals(department.getCollegeNum())){
             flag = true;
             logger.info("是该部门人员，可以操作！");

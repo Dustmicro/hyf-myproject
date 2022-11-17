@@ -1,153 +1,88 @@
 package com.myccb.service;
 
-import com.myccb.appmid.common.gateway.rewrite.AppMidRequestHeader;
 import com.myccb.appmid.common.gateway.util.ServiceExceptionMycc;
 import com.myccb.appmid.service.process.Service;
 import com.myccb.bean.CollegeReq;
 import com.myccb.bean.db.CollegeDb;
 import com.myccb.bean.db.UserDb;
 import com.myccb.comm.constant.CommConstant;
-import com.myccb.mapper.CollegeMapper;
+import com.myccb.config.AppUserContext;
+import com.myccb.mapper.CollegeDbMapper;
 import com.myccb.mapper.UserDbMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.Assert;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import utils.util.Assert;
 
 /**
- * 部门服务类
- * @author 黄弋峰 2022/11/10
+ * 学院服务
+ * @author 黄弋峰 2022/11/17
  */
 public class CollegeService {
     private static final Logger logger = LoggerFactory.getLogger(CollegeService.class);
 
     /**
-     * 部门查询服务类（单笔查询）
+     * 新增学院服务
      * @param collegeReq
      * @param sqlSession
-     * @param appMidRequestHeader
      * @return
      * @throws ServiceExceptionMycc
      */
-    @Service("selectCollege")
-    public Map<String , List<CollegeDb>> selectCollege (CollegeReq collegeReq, SqlSession sqlSession, AppMidRequestHeader appMidRequestHeader)throws ServiceExceptionMycc{
-        logger.info("查询部门服务开始，请求参数，{}" ,collegeReq);
-        Assert.isNull(collegeReq.getNum(),"必输项部门编号为空！");
-        List<CollegeDb> list = new ArrayList<>();
-        try{
-            CollegeDb db = SetReqToDb(collegeReq);
-            list = (List<CollegeDb>) sqlSession.getMapper(CollegeMapper.class).find(db);
-        } catch (Exception e){
-            logger.info("查询数据异常，有大问题！！");
-            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE,"查询数据异常，有大问题！！");
-        }
-        Map<String , List<CollegeDb>> map = new HashMap<>();
-        map.put(CommConstant.DATA, list);
-        return map;
-    }
-
-    /**
-     * 删除部门服务
-     * @param collegeReq
-     * @param sqlSession
-     * @param appMidRequestHeader
-     * @return
-     * @throws ServiceExceptionMycc
-     */
-    @Service("deleteCollege")
-    public String deleteCollege (CollegeReq collegeReq, SqlSession sqlSession, AppMidRequestHeader appMidRequestHeader) throws ServiceExceptionMycc{
-        logger.info("删除部门服务开始，请求参数，{}", collegeReq);
-        Assert.isNull(collegeReq.getNum(),"必输项部门编号为空！");
+    @Service("addCollege")
+    public String addCollege (CollegeReq collegeReq, SqlSession sqlSession) throws ServiceExceptionMycc {
+        logger.info("新增学院服务开始，{}",collegeReq);
+        Assert.isNull(collegeReq.getCollegeNum(), "必传项学院编号为空！！");
+        Assert.isNull(collegeReq.getCollegeName(), "必传项学院名称为空！！");
+        Assert.isNull(collegeReq.getMainUser(), "必传项主要负责人名称为空！！！");
+        Assert.isNull(collegeReq.getTel(), "必传项电话为空！！");
+        Assert.isNull(collegeReq.getAddress(), "必传项地址为空！！");
         try {
-            CollegeDb db = SetReqToDb(collegeReq);
-            CollegeDb collegeDb = sqlSession.getMapper(CollegeMapper.class).selectByPrimaryKey(db.getNum());
-            if (collegeDb != null) {
-                throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "该部门下还存在人员，不可删除！");
+            CollegeDb db = setReqToDb(collegeReq);
+            UserDb userId = AppUserContext.getUserDb();
+            UserDb checkRole = sqlSession.getMapper(UserDbMapper.class).selectByPrimaryKey(userId.getUserId());
+            if ("1".equals(checkRole)) {
+                if (collegeReq.getUserId() == null) {
+                    UserDb user = UserDb.builder()
+                            .userName(collegeReq.getMainUser())
+                            .tel(collegeReq.getTel())
+                            .build();
+                    UserDb num = sqlSession.getMapper(UserDbMapper.class).find(user);
+                    if (num == null) {
+                        throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "该成员未注册，请先注册该成员！！");
+                    } else {
+                        db.setUserId(num.getUserId());
+                    }
+                }
             } else {
-                sqlSession.getMapper(CollegeMapper.class).deleteByPrimaryKey(db.getNum());
+                throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "只有队长才有权限进行该操作！！");
             }
+            sqlSession.getMapper(CollegeDbMapper.class).insert(db);
         } catch (ServiceExceptionMycc e) {
-            logger.info("该部门下还存在人员，不可删除！", e.getDesc());
-            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "该部门下还存在人员，不可删除！");
+            logger.info("该成员未注册，请先注册该成员！！");
+            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, e.getDesc());
+        } catch (ExceptionInInitializerError e) {
+            logger.info("只有队长才有权限进行该操作！！");
+            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, e.getLocalizedMessage());
         } catch (Exception e) {
-            logger.info("该部门下还存在人员，不可删除！");
-            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "该部门下还存在人员，不可删除！");
+            logger.info("新增学院异常！！");
+            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "新增学院异常！！");
         }
         return CommConstant.SUCCESS;
     }
 
     /**
-     * 修改部门服务
-     * @param collegeReq
-     * @param sqlSession
-     * @param appMidRequestHeader
-     * @return
-     * @throws ServiceExceptionMycc
-     */
-    @Service("updateCollege")
-    public String updateCollege (CollegeReq collegeReq, SqlSession sqlSession, AppMidRequestHeader appMidRequestHeader) throws ServiceExceptionMycc{
-        logger.info("修改部门服务开始，请求参数，{}", collegeReq);
-        Assert.isNull(collegeReq.getNum(), "必输项部门编号为空！");
-        try {
-            CollegeDb db = SetReqToDb(collegeReq);
-            sqlSession.getMapper(CollegeMapper.class).updateByPrimaryKeySelective(db);
-            /**同时修改成员表信息**/
-            UserDb user = SetCollegeToUserDb(db);
-            sqlSession.getMapper(UserDbMapper.class).updateByPrimaryKeySelective(user);
-        } catch (Exception e) {
-            logger.info("修改部门服务异常！");
-            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "修改部门服务异常！");
-        }
-        return CommConstant.SUCCESS;
-    }
-
-    /**
-     * 新增部门服务
-     * @param collegeReq
-     * @param sqlSession
-     * @param appMidRequestHeader
-     * @return
-     * @throws ServiceExceptionMycc
-     */
-    @Service("insertCollege")
-    public String insertCollege (CollegeReq collegeReq, SqlSession sqlSession, AppMidRequestHeader appMidRequestHeader) throws ServiceExceptionMycc{
-        logger.info("新增部门服务开始，请求参数，{}", collegeReq);
-        try {
-            //应当添加一个权限校验
-            CollegeDb db = SetReqToDb(collegeReq);
-            sqlSession.getMapper(CollegeMapper.class).insert(db);
-        } catch (Exception e) {
-            logger.info("新增部门异常！！");
-            throw new ServiceExceptionMycc(CommConstant.ERROR_CODE, "新增部门异常！！");
-        }
-        return CommConstant.SUCCESS;
-    }
-
-    /**
-     * 将请求参数设置到数据库
+     * 将请求数据设置到数据库中
      * @param collegeReq
      * @return
      */
-    private CollegeDb SetReqToDb(CollegeReq collegeReq){
+    private CollegeDb setReqToDb(CollegeReq collegeReq){
         return CollegeDb.builder()
-                .num(collegeReq.getNum())
+                .collegeNum(collegeReq.getCollegeNum())
                 .collegeName(collegeReq.getCollegeName())
+                .tel(collegeReq.getTel())
+                .userId(collegeReq.getUserId())
+                .mainUser(collegeReq.getMainUser())
                 .address(collegeReq.getAddress())
-                .membeNum(collegeReq.getClooegeMember())
-                .build();
-    }
-
-    private UserDb SetCollegeToUserDb(CollegeDb db){
-        return UserDb.builder()
-                .collegeNum(db.getNum())
-                .collegeName(db.getCollegeName())
-                .userId(db.getUserId())
                 .build();
     }
 }

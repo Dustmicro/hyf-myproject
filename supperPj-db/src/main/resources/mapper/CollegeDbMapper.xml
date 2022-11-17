@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.CollegeDbMapper">
+  <resultMap id="BaseResultMap" type="com.example.bean.db.CollegeDb">
+    <id column="college_num" jdbcType="VARCHAR" property="collegeNum" />
+    <result column="college_name" jdbcType="VARCHAR" property="collegeName" />
+    <result column="main_user" jdbcType="VARCHAR" property="mainUser" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="tel" jdbcType="BIGINT" property="tel" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status_cd" jdbcType="INTEGER" property="statusCd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    college_num, college_name, main_user, user_id, tel, address, create_time, update_time, 
+    status_cd
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_college
+    where college_num = #{collegeNum,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from u_college
+    where college_num = #{collegeNum,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.bean.db.CollegeDb">
+    insert into u_college (college_num, college_name, main_user, 
+      user_id, tel, address, 
+      create_time, update_time, status_cd
+      )
+    values (#{collegeNum,jdbcType=VARCHAR}, #{collegeName,jdbcType=VARCHAR}, #{mainUser,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{tel,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{statusCd,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.bean.db.CollegeDb">
+    insert into u_college
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="collegeNum != null">
+        college_num,
+      </if>
+      <if test="collegeName != null">
+        college_name,
+      </if>
+      <if test="mainUser != null">
+        main_user,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="statusCd != null">
+        status_cd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="collegeNum != null">
+        #{collegeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeName != null">
+        #{collegeName,jdbcType=VARCHAR},
+      </if>
+      <if test="mainUser != null">
+        #{mainUser,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=BIGINT},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusCd != null">
+        #{statusCd,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.bean.db.CollegeDb">
+    update u_college
+    <set>
+      <if test="collegeName != null">
+        college_name = #{collegeName,jdbcType=VARCHAR},
+      </if>
+      <if test="mainUser != null">
+        main_user = #{mainUser,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=BIGINT},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusCd != null">
+        status_cd = #{statusCd,jdbcType=INTEGER},
+      </if>
+    </set>
+    where college_num = #{collegeNum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.bean.db.CollegeDb">
+    update u_college
+    set college_name = #{collegeName,jdbcType=VARCHAR},
+      main_user = #{mainUser,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status_cd = #{statusCd,jdbcType=INTEGER}
+    where college_num = #{collegeNum,jdbcType=VARCHAR}
+  </update>
+  <sql id="base_query">
+    <trim prefix="WHERE" prefixOverrides="AND | OR">
+      <if test="null != collegeNum">
+        andt.college_numt.college_num=#{collegeNum,jdbcType=VARCHAR}
+      </if>
+      <if test="null != collegeName">
+        andt.college_namet.college_name=#{collegeName,jdbcType=VARCHAR}
+      </if>
+      <if test="null != mainUser">
+        andt.main_usert.main_user=#{mainUser,jdbcType=VARCHAR}
+      </if>
+      <if test="null != userId">
+        andt.user_idt.user_id=#{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="null != tel">
+        andt.telt.tel=#{tel,jdbcType=BIGINT}
+      </if>
+      <if test="null != address">
+        andt.addresst.address=#{address,jdbcType=VARCHAR}
+      </if>
+      <if test="null != createTime">
+        andt.create_timet.create_time=#{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="null != updateTime">
+        andt.update_timet.update_time=#{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="null != statusCd">
+        andt.status_cdt.status_cd=#{statusCd,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </sql>
+  <select id="find" parameterType="com.example.bean.db.CollegeDb" resultMap="BaseResultMap">
+    selectt.*fromu_college t
+    <include refid="base_query" />
+  </select>
+  <select id="list" parameterType="com.example.bean.db.CollegeDb" resultMap="BaseResultMap">
+    selectt.*fromu_college t
+    <include refid="base_query" />
+  </select>
+</mapper>

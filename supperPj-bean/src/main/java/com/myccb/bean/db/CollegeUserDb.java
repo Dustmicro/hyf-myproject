@@ -8,24 +8,22 @@ import java.util.Date;
 
 @Data
 @Builder
-public class CollegeDb implements Serializable {
+public class CollegeUserDb implements Serializable {
     private String collegeNum;
 
     private String collegeName;
 
-    private String mainUser;
+    private String collegeMember;
 
-    private String userId;
-
-    private Long tel;
+    private String membeNum;
 
     private String address;
 
-    private Date createTime;
-
-    private Date updateTime;
+    private Long tel;
 
     private Integer statusCd;
+
+    private Date createTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -45,28 +43,20 @@ public class CollegeDb implements Serializable {
         this.collegeName = collegeName == null ? null : collegeName.trim();
     }
 
-    public String getMainUser() {
-        return mainUser;
+    public String getCollegeMember() {
+        return collegeMember;
     }
 
-    public void setMainUser(String mainUser) {
-        this.mainUser = mainUser == null ? null : mainUser.trim();
+    public void setCollegeMember(String collegeMember) {
+        this.collegeMember = collegeMember == null ? null : collegeMember.trim();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getMembeNum() {
+        return membeNum;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public Long getTel() {
-        return tel;
-    }
-
-    public void setTel(Long tel) {
-        this.tel = tel;
+    public void setMembeNum(String membeNum) {
+        this.membeNum = membeNum == null ? null : membeNum.trim();
     }
 
     public String getAddress() {
@@ -77,20 +67,12 @@ public class CollegeDb implements Serializable {
         this.address = address == null ? null : address.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Long getTel() {
+        return tel;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setTel(Long tel) {
+        this.tel = tel;
     }
 
     public Integer getStatusCd() {
@@ -99,5 +81,13 @@ public class CollegeDb implements Serializable {
 
     public void setStatusCd(Integer statusCd) {
         this.statusCd = statusCd;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
