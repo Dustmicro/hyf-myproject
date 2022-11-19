@@ -1,4 +1,4 @@
-package com.myccb.comm;
+package utils.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

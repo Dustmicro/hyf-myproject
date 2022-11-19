@@ -1,4 +1,0 @@
-org\support\generator\MybatisGenerator.class
-org\support\generator\plugins\CustomAbstractXmlElementGenerator.class
-org\support\generator\plugins\CustomPlugin.class
-org\support\generator\plugins\CustomJavaMapperMethodGenerator.class

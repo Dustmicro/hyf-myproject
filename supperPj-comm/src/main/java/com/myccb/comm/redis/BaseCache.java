@@ -1,6 +1,6 @@
 package com.myccb.comm.redis;
 
-import com.myccb.comm.StringUtilsMycc;
+import utils.util.StringUtilsMycc;
 
 import redis.clients.jedis.Jedis;
 

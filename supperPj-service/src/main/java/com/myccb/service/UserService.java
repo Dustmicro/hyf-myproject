@@ -2,7 +2,7 @@ package com.myccb.service;
 
 
 import com.myccb.bean.db.UserDb;
-import com.myccb.comm.StringUtilsMycc;
+import utils.util.StringUtilsMycc;
 import com.myccb.mapper.UserDbMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;

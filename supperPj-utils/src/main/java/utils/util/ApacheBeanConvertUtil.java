@@ -5,10 +5,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.PropertyUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,31 +22,31 @@ public final class ApacheBeanConvertUtil {
     }
 
     static {
-        ConvertUtils.register(new Converter() {
-            public static Object convert(Class aClass, Object o) {
-                return null;
-            } //注册一个日期转换器
-
-            public <T> T convert(Class type, Object value) {
-                Date date1 = null;
-                if (value instanceof String) {
-                    String date = (String) value;
-                    SimpleDateFormat sdf = null;
-                    if (date.contains(":")) {
-                        sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    } else {
-                        sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    }
-                    try {
-                        date1 = sdf.parse(date);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    return (T) date1;
-                }
-                return (T) value;
-            }
-        }, Date.class);
+//        ConvertUtils.register(new Converter() {
+////            public static Object convert(Class aClass, Object o) {
+////                return null;
+////            } //注册一个日期转换器
+//
+//            public <T> T convert(Class type, Object value) {
+//                Date date1 = null;
+//                if (value instanceof String) {
+//                    String date = (String) value;
+//                    SimpleDateFormat sdf = null;
+//                    if (date.contains(":")) {
+//                        sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                    } else {
+//                        sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                    }
+//                    try {
+//                        date1 = sdf.parse(date);
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
+//                    return (T) date1;
+//                }
+//                return (T) value;
+//            }
+//        }, Date.class);
 
 
 

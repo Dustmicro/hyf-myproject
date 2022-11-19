@@ -13,8 +13,9 @@ import org.springframework.context.ApplicationContext;
 public class StartApplication {
     private static final Logger logger = LoggerFactory.getLogger(StartApplication.class);
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(SpringApplication.class);
-        ServiceStartInit.InitSystemConfig(context);
+//        ApplicationContext context = SpringApplication.run(StartApplication.class);
+//        ServiceStartInit.InitSystemConfig(context);
+        SpringApplication.run(StartApplication.class, args);
         logger.info("启动成功！");
     }
 }

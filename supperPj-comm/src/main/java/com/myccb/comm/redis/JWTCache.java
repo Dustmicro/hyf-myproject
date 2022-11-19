@@ -4,6 +4,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Jedis;
 
 public class JWTCache extends BaseCache{
+    public static final String SESSION_PREFIX = "aaaaaa";
 //    public static final String SESSION_PREFIX = "session_";
 //
 //    public static String getValue(String jdi){

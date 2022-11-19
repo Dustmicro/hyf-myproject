@@ -1,4 +1,15 @@
-com\myccb\bean\UserReq.class
+com\myccb\bean\TbRunLog.class
+com\myccb\bean\RestResult.class
 com\myccb\bean\db\UserDb$UserDbBuilder.class
 com\myccb\bean\db\UserDb.class
-com\myccb\bean\TbRunLog.class
+com\myccb\bean\db\CollegeDb.class
+com\myccb\bean\CollegeUserReq.class
+com\myccb\bean\db\DictionaryDb$DictionaryDbBuilder.class
+com\myccb\bean\RspPage.class
+com\myccb\bean\db\CollegeDb$CollegeDbBuilder.class
+com\myccb\bean\CollegeReq.class
+com\myccb\bean\db\CollegeUserDb.class
+com\myccb\bean\entity\mapping\Mapping.class
+com\myccb\bean\UserReq.class
+com\myccb\bean\db\CollegeUserDb$CollegeUserDbBuilder.class
+com\myccb\bean\db\DictionaryDb.class

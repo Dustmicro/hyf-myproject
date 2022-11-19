@@ -7,7 +7,7 @@ import com.myccb.bean.UserReq;
 import com.myccb.bean.db.CollegeUserDb;
 import com.myccb.bean.db.UserDb;
 import com.myccb.comm.CommService;
-import com.myccb.comm.StringUtilsMycc;
+import utils.util.StringUtilsMycc;
 import com.myccb.comm.constant.CommConstant;
 import com.myccb.mapper.CollegeUserDbMapper;
 import com.myccb.mapper.UserDbMapper;

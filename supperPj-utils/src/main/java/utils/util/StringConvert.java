@@ -1,6 +1,5 @@
 package utils.util;
 
-import com.myccb.comm.StringUtilsMycc;
 import org.springframework.cglib.core.Converter;
 
 import java.math.BigDecimal;
